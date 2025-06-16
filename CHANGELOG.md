@@ -1,5 +1,9 @@
 # svelte-virtual-scroll-list changelog
 
+## 1.1.0
+
+- upgraded to Svelte 5
+
 ## 1.0.1
 
 - Fixed issue where data changes wouldn't refresh the item contents

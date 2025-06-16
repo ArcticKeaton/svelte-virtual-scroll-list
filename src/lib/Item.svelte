@@ -1,24 +1,33 @@
 <script lang="ts" generics="T">
-    import {afterUpdate, createEventDispatcher, onDestroy, onMount} from "svelte"
+    import { onDestroy, onMount, type Snippet, tick} from "svelte"
+    interface Props {
+        horizontal?: boolean,
+        uniqueKey: any,
+        type?: string,
+        onResize?: (id: any, size: number, type: string) => void,
+        children?: Snippet
+    }
 
-    export let horizontal = false
-    export let uniqueKey: any
-    export let type = "item"
+    let {
+        horizontal = false,
+        uniqueKey,
+        type = "item",
+        onResize = () => {},
+        children
+    }: Props = $props()
 
     let resizeObserver: ResizeObserver | null
     let itemDiv: HTMLDivElement
     let previousSize: number
 
-    const dispatch = createEventDispatcher()
     const shapeKey = horizontal ? "offsetWidth" : "offsetHeight"
 
     onMount(() => {
-        if (typeof ResizeObserver !== "undefined") {
-            resizeObserver = new ResizeObserver(dispatchSizeChange)
-            resizeObserver.observe(itemDiv)
-        }
+        resizeObserver = new ResizeObserver(dispatchSizeChange)
+        resizeObserver.observe(itemDiv)
+        tick().then(dispatchSizeChange);
     })
-    afterUpdate(dispatchSizeChange)
+
     onDestroy(() => {
         if (resizeObserver) {
             resizeObserver.disconnect()
@@ -30,10 +39,10 @@
         const size = itemDiv ? itemDiv[shapeKey] : 0
         if (size === previousSize) return
         previousSize = size
-        dispatch("resize", {id: uniqueKey, size, type})
+        onResize(uniqueKey, size, type)
     }
 </script>
 
 <div bind:this={itemDiv} class="virtual-scroll-item">
-    <slot/>
+    {@render children?.()}
 </div>
