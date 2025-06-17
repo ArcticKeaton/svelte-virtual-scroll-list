@@ -4,6 +4,8 @@
 
 fork of same library by v1ack [svelte-virtual-scroll-list](https://github.com/v1ack/svelte-virtual-scroll-list)
 
+This library has been upgraded to use Svelte 5. For Svelte 3.5 & 4 install v1.0.1
+
 Virtualized scrolling for big lists. For now this does not support bi-directionality (unlike v1ach's implementation)
 
 # Getting started
