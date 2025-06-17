@@ -1,5 +1,9 @@
 # svelte-virtual-scroll-list changelog
 
+## 1.1.1
+
+- fixed bug - incorrect function parameters on item resize
+
 ## 1.1.0
 
 - upgraded to Svelte 5

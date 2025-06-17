@@ -227,8 +227,7 @@
         }
     })
 
-    function onItemResized(event: CustomEvent<any>) {
-        const {id, size, type} = event.detail
+    function onItemResized(id: any, size: number, type: string) {
         if (type === "item")
             virtual.saveSize(id, size)
         else if (type === "slot") {
