@@ -70,6 +70,7 @@ More examples available in `example` folder
 | pageMode        | boolean  | `false`        | Let virtual list using global document to scroll through the list  |
 | start           | number   | `0`            | scroll position start index                                        |
 | offset          | number   | `0`            | scroll position offset                                             |
+| overflow        | number   | `5`            | the number of items to render outside of view                      |
 | topThreshold    | number   | `0`            | The threshold to emit `top` event, attention to multiple calls.    |
 | bottomThreshold | number   | `0`            | The threshold to emit `bottom` event, attention to multiple calls. |
 

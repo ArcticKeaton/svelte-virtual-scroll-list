@@ -1,5 +1,9 @@
 # svelte-virtual-scroll-list changelog
 
+## 1.1.2
+
+- fixed bug - list was not scrolling to desired start/offset position on mount
+
 ## 1.1.1
 
 - fixed bug - incorrect function parameters on item resize

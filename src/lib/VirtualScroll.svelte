@@ -1,7 +1,7 @@
 <script lang="ts" generics="T">
     import { isBrowser, Virtual } from "./virtual.js"
     import Item from "./Item.svelte"
-    import { onDestroy, onMount, type Snippet, untrack } from "svelte"
+    import { onDestroy, onMount, type Snippet, tick, untrack } from "svelte"
 
     interface Props {
         key: keyof T | typeof keyFn,
@@ -204,11 +204,13 @@
     onMount(() => {
         resizeObserver = new ResizeObserver(() => onDivScroll());
         onDivScroll()
-        if (start) {
-            scrollToIndex(start)
-        } else if (offset) {
-            scrollToOffset(offset)
-        }
+        tick().then(() => {
+            if (start) {
+                scrollToIndex(start)
+            } else if (offset) {
+                scrollToOffset(offset)
+            }
+        })
 
         if (pageMode) {
             updatePageModeFront()
